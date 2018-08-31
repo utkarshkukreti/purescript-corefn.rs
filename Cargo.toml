@@ -4,6 +4,9 @@ version = "0.1.0"
 authors = ["Utkarsh Kukreti <utkarshkukreti@gmail.com>"]
 description = "A parser for PureScript's corefn JSON representation."
 license = "MIT"
+documentation = "https://docs.rs/purescript-corefn"
+homepage = "https://github.com/utkarshkukreti/purescript-corefn.rs"
+repository = "https://github.com/utkarshkukreti/purescript-corefn.rs"
 
 [dependencies]
 serde = "1.0.75"
