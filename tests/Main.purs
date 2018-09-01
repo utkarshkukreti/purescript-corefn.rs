@@ -1,5 +1,7 @@
 module Main where
 
+foreign import foreign_ :: Int
+
 const :: forall a b. a -> b -> a
 const x _ = x
 

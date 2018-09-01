@@ -11,6 +11,7 @@ pub struct Module {
     pub imports: Vec<Import>,
     pub exports: Vec<String>,
     pub decls: Vec<Decl>,
+    pub foreign: Vec<String>,
 }
 
 #[derive(Debug, Deserialize)]
