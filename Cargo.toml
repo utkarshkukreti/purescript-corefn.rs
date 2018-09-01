@@ -1,6 +1,6 @@
 [package]
 name = "purescript-corefn"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Utkarsh Kukreti <utkarshkukreti@gmail.com>"]
 description = "A parser for PureScript's corefn JSON representation."
 license = "MIT"
