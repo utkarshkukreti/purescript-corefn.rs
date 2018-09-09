@@ -2,6 +2,9 @@ module Main where
 
 foreign import foreign_ :: Int
 
+foreign__ :: Int
+foreign__ = foreign_
+
 const :: forall a b. a -> b -> a
 const x _ = x
 
@@ -89,3 +92,16 @@ complexCase = case _ of
   { x: 1, y: [], z: z } -> 1
   { x: x, y: [1, 2, yyy @ yy], z: 'z' } -> x + 1 + 2 + yy + yyy
   _ -> 0
+
+newtype Color = Color String
+
+red :: Color
+red = Color "red"
+
+class Inspect a where
+  inspect :: a -> String
+
+data Maybe a = Just a | Nothing
+
+maybe :: Maybe Int
+maybe = Just 1

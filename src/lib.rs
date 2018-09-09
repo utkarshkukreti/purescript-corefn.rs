@@ -39,21 +39,25 @@ pub enum Expression {
     Abs {
         argument: String,
         body: Box<Expression>,
+        annotation: Annotation,
     },
     Accessor {
         expression: Box<Expression>,
         #[serde(rename = "fieldName")]
         field: String,
+        annotation: Annotation,
     },
     App {
         abstraction: Box<Expression>,
         argument: Box<Expression>,
+        annotation: Annotation,
     },
     Case {
         #[serde(rename = "caseAlternatives")]
         alternatives: Vec<Alternative>,
         #[serde(rename = "caseExpressions")]
         expressions: Vec<Expression>,
+        annotation: Annotation,
     },
     Constructor {
         #[serde(rename = "constructorName")]
@@ -62,16 +66,20 @@ pub enum Expression {
         type_: String,
         #[serde(rename = "fieldNames")]
         fields: Vec<String>,
+        annotation: Annotation,
     },
     Let {
         expression: Box<Expression>,
         binds: Vec<Decl>,
+        annotation: Annotation,
     },
     Literal {
         value: Literal,
+        annotation: Annotation,
     },
     Var {
         value: ModuleAndIdentifier,
+        annotation: Annotation,
     },
 }
 
@@ -161,6 +169,38 @@ pub enum LiteralBinder {
     Object { value: Vec<(String, Binder)> },
     #[serde(rename = "StringLiteral")]
     String { value: String },
+}
+
+#[derive(Debug, Deserialize)]
+pub struct Annotation {
+    pub meta: Option<Meta>,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(tag = "metaType")]
+pub enum Meta {
+    #[serde(rename = "IsConstructor")]
+    Constructor {
+        identifiers: Vec<String>,
+        #[serde(rename = "constructorType")]
+        type_: ConstructorType,
+    },
+    #[serde(rename = "IsForeign")]
+    Foreign,
+    #[serde(rename = "IsNewtype")]
+    Newtype,
+    #[serde(rename = "IsTypeClassConstructor")]
+    TypeClassConstructor,
+    #[serde(rename = "IsWhere")]
+    Where,
+}
+
+#[derive(Debug, Deserialize)]
+pub enum ConstructorType {
+    #[serde(rename = "ProductType")]
+    Product,
+    #[serde(rename = "SumType")]
+    Sum,
 }
 
 pub fn from_str(str: &str) -> Result<Module, serde_json::Error> {
