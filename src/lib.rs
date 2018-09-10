@@ -138,6 +138,7 @@ pub enum Binder {
         #[serde(rename = "typeName")]
         type_: ModuleAndIdentifier,
         binders: Vec<Binder>,
+        annotation: Annotation,
     },
     #[serde(rename = "LiteralBinder")]
     Literal { literal: LiteralBinder },
