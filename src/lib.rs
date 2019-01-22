@@ -4,7 +4,7 @@ extern crate serde_derive;
 extern crate serde;
 extern crate serde_json;
 
-#[derive(Clone, Debug, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Deserialize)]
 pub struct Module {
     #[serde(rename = "moduleName")]
     pub name: Vec<String>,
@@ -14,26 +14,26 @@ pub struct Module {
     pub foreign: Vec<String>,
 }
 
-#[derive(Clone, Debug, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Deserialize)]
 pub struct Import {
     #[serde(rename = "moduleName")]
     pub module: Vec<String>,
 }
 
-#[derive(Clone, Debug, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Deserialize)]
 #[serde(tag = "bindType")]
 pub enum Decl {
     NonRec(Bind),
     Rec { binds: Vec<Bind> },
 }
 
-#[derive(Clone, Debug, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Deserialize)]
 pub struct Bind {
     pub identifier: String,
     pub expression: Expression,
 }
 
-#[derive(Clone, Debug, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Deserialize)]
 #[serde(tag = "type")]
 pub enum Expression {
     Abs {
@@ -83,7 +83,7 @@ pub enum Expression {
     },
 }
 
-#[derive(Clone, Debug, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Deserialize)]
 #[serde(tag = "literalType")]
 pub enum Literal {
     #[serde(rename = "ArrayLiteral")]
@@ -102,14 +102,14 @@ pub enum Literal {
     String { value: String },
 }
 
-#[derive(Clone, Debug, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Deserialize)]
 pub struct Qualified {
     #[serde(rename = "moduleName")]
     pub module: Option<Vec<String>>,
     pub identifier: String,
 }
 
-#[derive(Clone, Debug, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Deserialize)]
 #[serde(untagged)]
 pub enum Alternative {
     Guarded {
@@ -122,13 +122,13 @@ pub enum Alternative {
     },
 }
 
-#[derive(Clone, Debug, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Deserialize)]
 pub struct GuardedExpression {
     pub guard: Expression,
     pub expression: Expression,
 }
 
-#[derive(Clone, Debug, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Deserialize)]
 #[serde(tag = "binderType")]
 pub enum Binder {
     #[serde(rename = "ConstructorBinder")]
@@ -153,7 +153,7 @@ pub enum Binder {
     Var { identifier: String },
 }
 
-#[derive(Clone, Debug, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Deserialize)]
 #[serde(tag = "literalType")]
 pub enum LiteralBinder {
     #[serde(rename = "ArrayLiteral")]
@@ -172,12 +172,12 @@ pub enum LiteralBinder {
     String { value: String },
 }
 
-#[derive(Clone, Debug, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Deserialize)]
 pub struct Annotation {
     pub meta: Option<Meta>,
 }
 
-#[derive(Clone, Debug, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Deserialize)]
 #[serde(tag = "metaType")]
 pub enum Meta {
     #[serde(rename = "IsConstructor")]
@@ -196,7 +196,7 @@ pub enum Meta {
     Where,
 }
 
-#[derive(Clone, Debug, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Deserialize)]
 pub enum ConstructorType {
     #[serde(rename = "ProductType")]
     Product,
