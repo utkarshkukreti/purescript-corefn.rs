@@ -78,7 +78,7 @@ pub enum Expression {
         annotation: Annotation,
     },
     Var {
-        value: ModuleAndIdentifier,
+        value: Qualified,
         annotation: Annotation,
     },
 }
@@ -103,7 +103,7 @@ pub enum Literal {
 }
 
 #[derive(Clone, Debug, Deserialize)]
-pub struct ModuleAndIdentifier {
+pub struct Qualified {
     #[serde(rename = "moduleName")]
     pub module: Option<Vec<String>>,
     pub identifier: String,
@@ -134,9 +134,9 @@ pub enum Binder {
     #[serde(rename = "ConstructorBinder")]
     Constructor {
         #[serde(rename = "constructorName")]
-        constructor: ModuleAndIdentifier,
+        constructor: Qualified,
         #[serde(rename = "typeName")]
-        type_: ModuleAndIdentifier,
+        type_: Qualified,
         binders: Vec<Binder>,
         annotation: Annotation,
     },
