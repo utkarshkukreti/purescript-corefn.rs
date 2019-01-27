@@ -54,7 +54,19 @@ pub fn expression(
                 walk_decl(decl, pre, post);
             }
         }
-        Literal { .. } => {}
+        Literal { value, .. } => match value {
+            ::Literal::Array { value } => {
+                for v in value {
+                    f!(v)
+                }
+            }
+            ::Literal::Object { value } => {
+                for (_, v) in value {
+                    f!(v)
+                }
+            }
+            _ => {}
+        },
         Var { .. } => {}
     }
     post(expr);
@@ -130,7 +142,19 @@ pub fn expression_mut(
                 walk_decl(decl, pre, post);
             }
         }
-        Literal { .. } => {}
+        Literal { value, .. } => match value {
+            ::Literal::Array { value } => {
+                for v in value {
+                    f!(v)
+                }
+            }
+            ::Literal::Object { value } => {
+                for (_, v) in value {
+                    f!(v)
+                }
+            }
+            _ => {}
+        },
         Var { .. } => {}
     }
     post(expr);
