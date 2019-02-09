@@ -9,6 +9,6 @@ homepage = "https://github.com/utkarshkukreti/purescript-corefn.rs"
 repository = "https://github.com/utkarshkukreti/purescript-corefn.rs"
 
 [dependencies]
-serde = "1.0.85"
-serde_derive = "1.0.85"
-serde_json = "1.0.36"
+serde = "1.0.87"
+serde_derive = "1.0.87"
+serde_json = "1.0.38"
