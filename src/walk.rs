@@ -67,6 +67,16 @@ pub fn expression(
             }
             _ => {}
         },
+        ObjectUpdate {
+            expression,
+            updates,
+            ..
+        } => {
+            f!(expression);
+            for (_, update) in updates {
+                f!(update);
+            }
+        }
         Var { .. } => {}
     }
     post(expr);
@@ -155,6 +165,16 @@ pub fn expression_mut(
             }
             _ => {}
         },
+        ObjectUpdate {
+            expression,
+            updates,
+            ..
+        } => {
+            f!(expression);
+            for (_, update) in updates {
+                f!(update);
+            }
+        }
         Var { .. } => {}
     }
     post(expr);

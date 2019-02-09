@@ -79,6 +79,11 @@ pub enum Expression {
         value: Literal,
         annotation: Annotation,
     },
+    ObjectUpdate {
+        expression: Box<Expression>,
+        updates: Vec<(String, Expression)>,
+        annotation: Annotation,
+    },
     Var {
         value: Qualified,
         annotation: Annotation,

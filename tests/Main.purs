@@ -105,3 +105,6 @@ data Maybe a = Just a | Nothing
 
 maybe :: Maybe Int
 maybe = Just 1
+
+incrementA :: forall r. { a :: Int | r } -> { a :: Int | r }
+incrementA o = o { a = o.a + 1 }
